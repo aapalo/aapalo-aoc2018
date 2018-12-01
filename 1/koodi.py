@@ -8,19 +8,34 @@ import time
 
 #part 1
 def day(te):
-
-    return 0
+    sum = 0
+    for t in te:
+        sum += t
+    return sum
 
 #part 2
 def dayb(te):
-
-    return 0
+    sum = 0
+    lsum = []
+    ans = False
+    while(1):
+        for t in te:
+            #print(l)
+            sum += t
+            if sum in lsum:
+                ans = True
+                break
+            lsum.append(sum)
+        if ans == True:
+            break
+    #print(len(lsum),sum)
+    return sum
 
 '''     #######     '''
 
 dev = 0 # extra prints
 part = 1 # 1,2 or 3
-samp = 1 # 0 or 1
+samp = 0 # 0 or 1
 
 time0 = time.time()
 
