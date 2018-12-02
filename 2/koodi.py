@@ -62,7 +62,7 @@ def dayb(te):
 
 pva = 2 #which day
 dev = 0 # extra prints
-part = 2 # 1,2 or 3
+part = 1 # 1,2 or 3
 samp = 0 # 0 or 1
 
 time0 = time.time()
