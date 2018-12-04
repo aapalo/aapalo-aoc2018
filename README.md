@@ -16,3 +16,5 @@ Running CPython via terminal and Atom took the same time, so values for Atom are
 | 2-2         | 0.656    | 0.298   | 2.20       |
 | 3-1         | 0.31     | 0.129   | 2.4        |
 | 3-2         | 36       | 4       | 9          |
+| 4-1         | 0.304    | 1.318   | 0.23       |
+| 4-2         | 0.309    | 1.335   | 0.23       |

@@ -1,10 +1,12 @@
-#from collections import Counter
-#import re
-#import os
 import time
 from datetime import datetime
 from datetime import timedelta
-'''     #######     '''
+
+'''   #######
+
+Warning! A messy bowl of spaghetti code
+
+      #######     '''
 
 def sortdata(l):
     d = {}
@@ -108,21 +110,34 @@ def dayb(d):
         if key.hour == 1:
             key += timedelta(hours=22,minutes=40)
             awake = 1
-    #loop guards
     dg = {}
-    for g in ds.keys():
-        dg[g] = 0
-        #loop timestamps
-        for k in dm.keys():
-            pass
-    return 0
+    for k in ds.keys():
+        dg[k] = [0]*60
+    minList = [0]*60
+    key = tstart
+    i = 0
+    while i < 60:
+        for k in sorted(dm.keys()):
+            if (int(k.minute) == i) and (dm[k][1] == 0):
+                dg[dm[k][0]][i] += 1
+        i += 1
+    maxminute = 0
+    maxidx = 0
+    maxguard = 0
+    for k in dg.keys():
+        if maxminute < max(dg[k]):
+            maxidx = dg[k].index(max(dg[k]))
+            maxminute = max(dg[k])
+            maxguard = k
+    print("Guard {}, at 00:{}, {} times".format(maxguard, maxidx, maxminute))
+    return int(maxguard[1:])*maxidx
     # (117061, 2389, 49)
 '''     #######     '''
 
 pva = 4
 dev = 0 # extra prints
-part = 2 # 1,2 or 3
-samp = 1 # 0 or 1
+part = 1 # 1,2 or 3
+samp = 0 # 0 or 1
 
 time0 = time.time()
 
