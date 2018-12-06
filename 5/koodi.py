@@ -1,8 +1,11 @@
+#!/usr/bin/python3
+
 #from collections import Counter
 #import re
 #import os
 import time
 import string
+
 '''     #######     '''
 
 ''' Part 1 '''
@@ -17,20 +20,13 @@ def day(poly):
             unit1 = poly[p+1]
         except IndexError:
             break
-        if unit0.lower() == unit1.lower():
-            if (unit0.islower() and unit1.isupper()) or \
-                (unit1.islower() and unit0.isupper()):
-                #poly = poly[:p] + poly[(p+2):]
-                #poly.pop(p)
-                #poly.pop(p)
-                del poly[p:(p+2)]
-                if dev:
-                    print(len(poly), poly)
-                p = 0
-            else:
-                p += 1
-        else:
-            p += 1
+        if unit0 == unit1.swapcase():
+            del poly[p:(p+2)]
+            if dev:
+                print(len(poly), poly)
+            p = max(0, p - 1)
+            continue
+        p += 1
     return len(poly)
 
 ''' Part 2 '''
@@ -42,18 +38,13 @@ def reactPoly(poly):
             unit1 = poly[p+1]
         except IndexError:
             break
-        if unit0.lower() == unit1.lower():
-            if (unit0.islower() and unit1.isupper()) or \
-                (unit1.islower() and unit0.isupper()):
-                #poly = poly[:p] + poly[(p+2):]
-                #poly.pop(p)
-                #poly.pop(p)
-                del poly[p:(p+2)]
-                p = 0
-            else:
-                p += 1
-        else:
-            p += 1
+        if unit0 == unit1.swapcase():
+            del poly[p:(p+2)]
+            if dev:
+                print(len(poly), poly)
+            p = max(0, p - 1)
+            continue
+        p += 1
     return poly
 
 def dayb(te):
