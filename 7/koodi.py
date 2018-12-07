@@ -1,19 +1,68 @@
+#!/usr/bin/python3
+
 #from collections import Counter
 #import re
 #import os
 import time
+import string
+from collections import defaultdict
 '''     #######     '''
 
 ''' Part 1 '''
 def day(te):
+    letters = list(string.ascii_uppercase)
+    prevs = defaultdict(set) #prevs[A] = [C]
+    nexts = defaultdict(set) #nexts[A] = [B,D]
     for t in te:
         prev = t.split(" ")[1]
         next = t.split(" ")[7]
-        print(prev,ord(prev),next,ord(next))
-    #find start and end steps?
+        prevs[next].add(prev)
+        nexts[prev].add(next)
+        #print(prev,ord(prev),next,ord(next))
+    #find start and end steps
+    firstStep = set()
+    lastStep = set()
+    for l in letters:
+        if (l in prevs.keys()) or (l in nexts.keys()):
+            if (l not in prevs.keys()):
+                firstStep.add(l)
+            if (l not in nexts.keys()):
+                lastStep.add(l)
+            #print(l,prevs[l],nexts[l])
+    #print(firstStep,sorted(firstStep))
+    #print(lastStep)
+    available = firstStep
+    avail = available.copy() #subet of available
+    answer = ""
+    checked = set()
+    step = sorted(available)[0]
+    i = 0
+    while len(available) > 0:
+        if dev:
+            print(step, sorted(available),len(available), answer)
+        if step in answer:
+            available.remove(step)
+            avail = available.copy()
+            step = sorted(avail)[0]
+            continue
+        if not (prevs[step] <= checked):
+            avail.remove(step)
+            step = sorted(avail)[0]
+            continue
+            #not a subset of checked
+
+        #    continue
+        available.remove(step)
+        available |= nexts[step] #add smaller set to available
+        answer += step
+        if len(available) == 0:
+            break
+        checked.add(step)
+        avail = available.copy()
+        step = sorted(avail)[0]
     #for each step, add all availables in a list
     #go through availables in alphabetical order
-    
+
     '''
         for tasks in available:
             if ord(a) < ord(b):
@@ -21,7 +70,7 @@ def day(te):
                 pop(a)
     '''
 
-    return 0
+    return answer
 
 ''' Part 2 '''
 def dayb(te):
@@ -33,7 +82,7 @@ def dayb(te):
 pva = 7
 dev = 0 # extra prints
 part = 1 # 1,2 or 3
-samp = 1 # 0 or 1
+samp = 0 # 0 or 1
 
 time0 = time.time()
 
