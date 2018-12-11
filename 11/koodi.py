@@ -4,13 +4,26 @@
 #import re
 #import os
 import time
-#from collections import defaultdict
+from collections import defaultdict
 #from collections import deque
 '''     #######     '''
 
 ''' Part 1 '''
-def day(te):
+def calcPower(x,y,s):
+    rackID = 10 + x
+    ans = rackID * y
+    ans += s #serial
+    ans *= rackID
+    #hundreds, or 0 if <100
+    ans -= 5
+    return ans
 
+def day(te):
+    serial = int(te[0])
+    d = defaultdict(list)
+    for k in range(1,301):
+        d[k] = defaultdict(int)
+    print(len(d.keys()))
     return 0
 
 ''' Part 2 '''
@@ -20,7 +33,7 @@ def dayb(te):
 
 '''     #######     '''
 
-pva = 26
+pva = 11
 dev = 0 # extra prints
 part = 1 # 1,2 or 3
 samp = 1 # 0 or 1
